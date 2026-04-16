@@ -1,0 +1,194 @@
+{
+  "s1_consumer_focus": {
+    "title": { "zh": "消費者所關注益生菌的特點", "en": "Consumer Priorities for Probiotics" },
+    "data": [
+      { "label": { "zh": "活菌數", "en": "Live Count" }, "value": 68 },
+      { "label": { "zh": "功能性", "en": "Functionality" }, "value": 15 },
+      { "label": { "zh": "品牌", "en": "Brand" }, "value": 10 }
+    ]
+  },
+  "s2_survival_rate": {
+    "title": { "zh": "胃酸、膽鹽耐受性實驗", "en": "Gastric Acid & Bile Salt Tolerance" },
+    "subtitle": { "zh": "在胃酸及膽鹽處理後的存活率測試", "en": "Survival Rate After Acid & Bile Treatment" },
+    "timepoints": ["0h", "1.5h", "3h", "4.5h", "6h"],
+    "series": [
+      { "name": { "zh": "納豆芽孢桿菌 DSM35068", "en": "B. subtilis DSM35068" }, "color": "#42a5f5", "values": [100, 100, 100, 101, 102, 103] },
+      { "name": { "zh": "凝結芽孢桿菌 DSM35067", "en": "B. coagulans DSM35067" }, "color": "#ffd54f", "values": [100, 99, 100, 101, 101, 102] }
+    ]
+  },
+  "s2_colonization": {
+    "title": { "zh": "腸道定殖力測試", "en": "Gut Colonization Adhesion Test" },
+    "categories": [
+      { "zh": "凝結芽孢桿菌\nDSM35067", "en": "B. coagulans\nDSM35067" },
+      { "zh": "納豆芽孢桿菌\nDSM35068", "en": "B. subtilis\nDSM35068" },
+      { "zh": "嗜酸乳桿菌", "en": "L. acidophilus" },
+      { "zh": "雷特式B菌", "en": "B. lactis" }
+    ],
+    "series": [
+      { "name": { "zh": "對照組", "en": "Control" }, "color": "rgba(255,255,255,0.3)", "values": [4.5, 7.2, 5.0, 5.8] },
+      { "name": { "zh": "添加燕窩酸組", "en": "+BrilliaNest™" }, "color": "#42a5f5", "values": [17.5, 21.5, 14.5, 17.0] }
+    ]
+  },
+  "s3_ifn_beta": {
+    "title": { "zh": "IFN-β", "en": "IFN-β" },
+    "categories": ["Control", "BC", "BS", "LA", "BL"],
+    "values": [100, 120, 118, 115, 110],
+    "highlight": [1, 2]
+  },
+  "s3_ifn_gamma": {
+    "title": { "zh": "IFN-γ", "en": "IFN-γ" },
+    "categories": ["Control", "BC", "BS", "LA", "BL"],
+    "values": [80, 480, 460, 420, 380],
+    "highlight": [1, 2]
+  },
+  "s3_tgf_beta": {
+    "title": { "zh": "TGF-β", "en": "TGF-β" },
+    "categories": ["Control", "Pathogen", "BC", "BS", "LA", "BL"],
+    "values": [100, 120, 190, 180, 155, 150],
+    "highlight": [2, 3]
+  },
+  "s3_il4": {
+    "title": { "zh": "IL-4", "en": "IL-4" },
+    "categories": ["Control", "Allergen", "BC", "BS", "LA", "BL"],
+    "values": [100, 220, 105, 110, 130, 140],
+    "highlight": [2, 3]
+  },
+  "s3_ifn_il4_ratio": {
+    "title": { "zh": "IFN-γ/IL-4 (Th1/Th2)", "en": "IFN-γ/IL-4 (Th1/Th2)" },
+    "categories": ["Control", "BC", "BS", "LA", "BL"],
+    "values": [50, 200, 190, 100, 90],
+    "highlight": [1, 2]
+  },
+  "s4_glp1": {
+    "title": { "zh": "激活瘦瘦素 GLP-1 (腸泌素) 的試驗", "en": "GLP-1 (Incretin) Activation Test" },
+    "categories": [
+      { "zh": "Control", "en": "Control" },
+      { "zh": "BC-V 生長型態", "en": "BC-V Vegetative" },
+      { "zh": "BC-S 孢子型態", "en": "BC-S Spore" },
+      { "zh": "BS-V 生長型態", "en": "BS-V Vegetative" },
+      { "zh": "BS-S 孢子型態", "en": "BS-S Spore" },
+      { "zh": "LA 嗜酸乳桿菌", "en": "LA L. acidophilus" },
+      { "zh": "BL 比菲德氏菌", "en": "BL B. lactis" }
+    ],
+    "values": [100, 480, 450, 500, 470, 250, 230],
+    "colors": ["rgba(255,255,255,0.3)", "#ffd54f", "#ffd54f", "#42a5f5", "#42a5f5", "#78909c", "#78909c"]
+  },
+  "s4_dopamine": {
+    "title": { "zh": "腦腸軸多巴胺 Dopamine 激活實驗", "en": "Gut-Brain Axis Dopamine Activation" },
+    "categories": ["Control", "BC-V", "BC-S", "BC-L", "BS-V", "BS-S", "BS-L"],
+    "values": [20, 130, 125, 230, 130, 130, 235],
+    "colors": ["rgba(255,255,255,0.3)", "#ffd54f", "#ffd54f", "#ffd54f", "#42a5f5", "#42a5f5", "#42a5f5"]
+  },
+  "s4_catalase": {
+    "title": { "zh": "過氧化物歧化酶 Catalase 活性 (U/mL)", "en": "Catalase Activity (U/mL)" },
+    "categories": [
+      { "zh": "日本億菌大師\nDSM35067", "en": "MASTERBiotics\nDSM35067" },
+      { "zh": "它牌凝結芽\n孢菌S", "en": "Other BC\nSpore S" },
+      { "zh": "日本億菌大師\nDSM35068", "en": "MASTERBiotics\nDSM35068" },
+      { "zh": "它牌納豆芽\n孢菌H", "en": "Other BS\nHydrolysate H" },
+      { "zh": "它牌納豆芽\n孢菌S", "en": "Other BS\nSpore S" }
+    ],
+    "values": [8000, 3800, 13800, 9200, 7000],
+    "colors": ["#ffd54f", "#78909c", "#ffd54f", "#78909c", "#78909c"]
+  },
+  "s4_sod": {
+    "title": { "zh": "超氧化物歧化酶 SOD 活性 (U/mL)", "en": "SOD Activity (U/mL)" },
+    "categories": [
+      { "zh": "日本億菌大師\nDSM35067", "en": "MASTERBiotics\nDSM35067" },
+      { "zh": "它牌凝結芽\n孢菌S", "en": "Other BC\nSpore S" },
+      { "zh": "日本億菌大師\nDSM35068", "en": "MASTERBiotics\nDSM35068" },
+      { "zh": "它牌凝結芽\n孢菌B", "en": "Other BC\nB" },
+      { "zh": "它牌納豆芽\n孢菌H", "en": "Other BS\nH" },
+      { "zh": "它牌納豆芽\n孢菌S", "en": "Other BS\nS" }
+    ],
+    "values": [800, 200, 360, 650, 580, 580],
+    "colors": ["#ffd54f", "#78909c", "#42a5f5", "#78909c", "#78909c", "#78909c"]
+  },
+  "s5_bristol_whey": {
+    "title": { "zh": "乳清蛋白 Bristol 排便結果", "en": "Whey Protein Bristol Stool Results" },
+    "groups": [
+      {
+        "name": { "zh": "A. 僅乳清蛋白", "en": "A. Whey Only" },
+        "days": ["Baseline", "1st", "2nd", "3rd", "4th", "5th"],
+        "constipation": [20, 20, 20, 20, 20, 20],
+        "diarrhea": [10, 10, 10, 10, 10, 10],
+        "healthy": [70, 70, 70, 70, 70, 70]
+      },
+      {
+        "name": { "zh": "B. +凝結芽孢桿菌", "en": "B. +B. coagulans" },
+        "days": ["Baseline", "1st", "2nd", "3rd", "4th", "5th"],
+        "constipation": [20, 15, 10, 8, 6, 6],
+        "diarrhea": [10, 10, 9, 9, 9, 9],
+        "healthy": [70, 75, 81, 83, 85, 85],
+        "improvement": { "zh": "便秘改善70%，腹瀉改善10%", "en": "Constipation -70%, Diarrhea -10%" }
+      },
+      {
+        "name": { "zh": "C. +納豆芽孢桿菌", "en": "C. +B. subtilis" },
+        "days": ["Baseline", "1st", "2nd", "3rd", "4th", "5th"],
+        "constipation": [20, 15, 10, 8, 6, 6],
+        "diarrhea": [10, 10, 9, 9, 9, 9],
+        "healthy": [70, 75, 81, 83, 85, 85],
+        "improvement": { "zh": "便秘改善70%，腹瀉改善10%", "en": "Constipation -70%, Diarrhea -10%" }
+      }
+    ]
+  },
+  "s5_protein_output": {
+    "title": { "zh": "蛋白質排出體外", "en": "Protein Excretion Comparison" },
+    "groups": [
+      { "protein": { "zh": "乳清蛋白", "en": "Whey" }, "no_probiotic": 38.36, "bc": 22.43, "bs": 22.16, "intake": 50 },
+      { "protein": { "zh": "碗豆蛋白", "en": "Pea" }, "no_probiotic": 41.29, "bc": 23.21, "bs": 23.40, "intake": 50 },
+      { "protein": { "zh": "膠原蛋白", "en": "Collagen" }, "no_probiotic": 27.94, "bc": 22.13, "bs": 22.24, "intake": 50 }
+    ]
+  },
+  "s5_tn_fan_whey": {
+    "title": { "zh": "乳清蛋白組 糞便氮/游離胺基酸氮", "en": "Whey Group: Fecal TN & FAN" },
+    "groups": [
+      { "name": "A", "tn": 10.23, "fan": 0.65, "fan_tn": 0.06 },
+      { "name": "B (+BC)", "tn": 5.98, "fan": 1.20, "fan_tn": 0.20 },
+      { "name": "C (+BS)", "tn": 5.91, "fan": 1.28, "fan_tn": 0.22 }
+    ]
+  },
+  "s6_comparison": {
+    "title": { "zh": "與市場上熱門原料的比較", "en": "Market Comparison" },
+    "headers": [
+      { "zh": "項目", "en": "Item" },
+      { "zh": "MASTERBiotics™", "en": "MASTERBiotics™" },
+      { "zh": "B. coagulans", "en": "B. coagulans" },
+      { "zh": "B. subtilis", "en": "B. subtilis" },
+      { "zh": "乳酸菌/雙歧桿菌", "en": "Lactobacillus/Bifido" }
+    ],
+    "rows": [
+      {
+        "label": { "zh": "原料規格", "en": "Specs" },
+        "values": ["BC 50B + BS 200B", "15 billion", "100 billion", "100-200 billion"]
+      },
+      {
+        "label": { "zh": "儲存條件", "en": "Storage" },
+        "values": [
+          { "zh": "無需冷藏與冷鏈運輸", "en": "No refrigeration needed" },
+          { "zh": "無需冷藏與冷鏈運輸", "en": "No refrigeration needed" },
+          { "zh": "無需冷藏與冷鏈運輸", "en": "No refrigeration needed" },
+          { "zh": "儲存溫度不能超過28°C", "en": "Must store below 28°C" }
+        ]
+      },
+      {
+        "label": { "zh": "應用範圍", "en": "Applications" },
+        "values": [
+          { "zh": "保健食品/烘焙/糖果", "en": "Supplements/Baking/Confectionery" },
+          { "zh": "保健食品/烘焙/糖果", "en": "Supplements/Baking/Confectionery" },
+          { "zh": "保健食品/烘焙/糖果", "en": "Supplements/Baking/Confectionery" },
+          { "zh": "膠囊和粉劑保健品", "en": "Capsules & powder only" }
+        ]
+      },
+      {
+        "label": { "zh": "健康功能", "en": "Functions" },
+        "values": [
+          { "zh": "腸道/免疫/體重管理/認知多重功能", "en": "Gut/Immune/Weight/Cognitive - Multi-function" },
+          { "zh": "視供應商而定", "en": "Varies by supplier" },
+          { "zh": "視供應商而定", "en": "Varies by supplier" },
+          { "zh": "視供應商而定", "en": "Varies by supplier" }
+        ]
+      }
+    ]
+  }
+}
