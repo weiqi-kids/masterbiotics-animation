@@ -6,6 +6,9 @@ import { renderColonizationBar } from '../charts/colonization-bar.js';
 import { renderGlp1Bar } from '../charts/glp1-bar.js';
 import { renderDopamineBar } from '../charts/dopamine-bar.js';
 import { renderSodCatalase } from '../charts/sod-catalase.js';
+import { renderProteinAbsorption } from '../charts/protein-absorption.js';
+import { renderBristolVisual } from '../charts/bristol-visual.js';
+import { renderComparisonTable } from '../charts/comparison-table.js';
 
 let chartData = null;
 const chartContainer = document.getElementById('chart-container');
@@ -71,8 +74,31 @@ const SCENE_CHARTS = {
       }, 40000);
     }
   },
-  scene_5: null,
-  scene_6: null,
+  scene_5: {
+    render: (data) => {
+      const container = document.getElementById('chart-container');
+      container.style.display = 'flex';
+      container.style.flexDirection = 'column';
+      container.style.gap = '8px';
+
+      const topDiv = document.createElement('div');
+      topDiv.id = 'chart-s5-protein';
+      topDiv.style.flex = '1';
+      const bottomDiv = document.createElement('div');
+      bottomDiv.id = 'chart-s5-bristol';
+      bottomDiv.style.flex = '1';
+      container.appendChild(topDiv);
+      container.appendChild(bottomDiv);
+
+      renderProteinAbsorption(data.s5_protein_output, 'chart-s5-protein');
+      setTimeout(() => { renderBristolVisual(data.s5_bristol_whey, 'chart-s5-bristol'); }, 3000);
+    }
+  },
+  scene_6: {
+    render: (data) => {
+      renderComparisonTable(data.s6_comparison, 'chart-container');
+    }
+  },
 };
 
 async function init() {
