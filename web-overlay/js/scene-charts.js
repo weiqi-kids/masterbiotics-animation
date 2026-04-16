@@ -1,6 +1,8 @@
 import { on } from './bridge.js';
 import { renderConsumerFocus } from '../charts/consumer-focus.js';
 import { renderImmuneGroup } from '../charts/immune-group.js';
+import { renderSurvivalLine } from '../charts/survival-line.js';
+import { renderColonizationBar } from '../charts/colonization-bar.js';
 
 let chartData = null;
 const chartContainer = document.getElementById('chart-container');
@@ -12,7 +14,23 @@ const SCENE_CHARTS = {
       renderConsumerFocus(data.s1_consumer_focus, 'chart-container');
     }
   },
-  scene_2: null,
+  scene_2: {
+    render: (data) => {
+      const container = document.getElementById('chart-container');
+      const topDiv = document.createElement('div');
+      topDiv.id = 'chart-s2-survival';
+      topDiv.style.flex = '1';
+      const bottomDiv = document.createElement('div');
+      bottomDiv.id = 'chart-s2-colonization';
+      bottomDiv.style.flex = '1';
+      container.appendChild(topDiv);
+      container.appendChild(bottomDiv);
+      renderSurvivalLine(data.s2_survival_rate, 'chart-s2-survival');
+      setTimeout(() => {
+        renderColonizationBar(data.s2_colonization, 'chart-s2-colonization');
+      }, 40000);
+    }
+  },
   scene_3: {
     render: (data) => {
       renderImmuneGroup(data, 'chart-container');
