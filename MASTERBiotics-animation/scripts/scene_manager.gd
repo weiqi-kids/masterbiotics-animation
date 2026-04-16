@@ -22,7 +22,7 @@ var _transitioning := false
 
 @onready var scene_container: Node3D = get_node("../SceneContainer")
 @onready var js_bridge: Node = get_node("../JSBridge")
-@onready var transition_overlay: ColorRect = get_node("../TransitionOverlay")
+@onready var transition_overlay: ColorRect = get_node("../TransitionLayer/TransitionOverlay")
 
 func _process(delta: float) -> void:
 	if _auto_playing and not _transitioning:
@@ -66,14 +66,18 @@ func _load_scene(index: int) -> void:
 	_transitioning = true
 	_scene_timer = 0.0
 
-	var tween := create_tween()
-	tween.tween_property(transition_overlay, "color:a", 1.0, 0.4)
-	await tween.finished
+	# Fade out
+	if transition_overlay:
+		var tween := create_tween()
+		tween.tween_property(transition_overlay, "color:a", 1.0, 0.4)
+		await tween.finished
 
+	# Remove old scene
 	if _current_scene_node:
 		_current_scene_node.queue_free()
 		_current_scene_node = null
 
+	# Load new scene
 	var scene_data: Dictionary = SCENES[index]
 	var packed_scene := load(scene_data.path) as PackedScene
 	if packed_scene:
@@ -83,9 +87,11 @@ func _load_scene(index: int) -> void:
 	js_bridge.notify_scene_change(scene_data.id)
 	scene_started.emit(scene_data.id)
 
-	var tween_in := create_tween()
-	tween_in.tween_property(transition_overlay, "color:a", 0.0, 0.4)
-	await tween_in.finished
+	# Fade in
+	if transition_overlay:
+		var tween_in := create_tween()
+		tween_in.tween_property(transition_overlay, "color:a", 0.0, 0.4)
+		await tween_in.finished
 
 	_transitioning = false
 	print("[SceneManager] Loaded: %s" % scene_data.id)
