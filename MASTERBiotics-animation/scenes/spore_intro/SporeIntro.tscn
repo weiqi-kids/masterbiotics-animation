@@ -1,0 +1,104 @@
+[gd_scene load_steps=11 format=3 uid="uid://spore_intro_scene"]
+
+[ext_resource type="Script" path="res://scenes/spore_intro/spore_intro.gd" id="1"]
+
+[sub_resource type="StandardMaterial3D" id="Material_bc"]
+albedo_color = Color(1.0, 0.835, 0.31, 1.0)
+emission_enabled = true
+emission = Color(1.0, 0.835, 0.31, 1.0)
+emission_energy_multiplier = 0.3
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bc"]
+radius = 0.3
+height = 0.9
+
+[sub_resource type="StandardMaterial3D" id="Material_bs"]
+albedo_color = Color(0.259, 0.647, 0.961, 1.0)
+emission_enabled = true
+emission = Color(0.259, 0.647, 0.961, 1.0)
+emission_energy_multiplier = 0.3
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bs"]
+radius = 0.3
+height = 0.9
+
+[sub_resource type="StandardMaterial3D" id="Material_spore"]
+transparency = 1
+albedo_color = Color(1.0, 0.835, 0.31, 0.3)
+emission_enabled = true
+emission = Color(1.0, 0.835, 0.31, 1.0)
+emission_energy_multiplier = 0.5
+rim_enabled = true
+rim = 0.8
+rim_tint = 0.6
+
+[sub_resource type="SphereMesh" id="SphereMesh_spore"]
+radius = 0.55
+height = 1.1
+radial_segments = 32
+rings = 16
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcess_acid"]
+emission_shape = 3
+emission_box_extents = Vector3(4, 3, 2)
+direction = Vector3(0, -1, 0)
+spread = 30.0
+initial_velocity_min = 1.0
+initial_velocity_max = 2.5
+gravity = Vector3(0, -0.5, 0)
+color = Color(0.4, 0.733, 0.416, 0.6)
+color_ramp = null
+
+[sub_resource type="SphereMesh" id="SphereMesh_acid_particle"]
+radius = 0.03
+height = 0.06
+
+[sub_resource type="StandardMaterial3D" id="Material_acid_draw"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.4, 0.733, 0.416, 0.7)
+
+[node name="SporeIntro" type="Node3D"]
+script = ExtResource("1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+fov = 50.0
+
+[node name="BC_Bacteria" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
+mesh = SubResource("CapsuleMesh_bc")
+surface_material_override/0 = SubResource("Material_bc")
+
+[node name="BS_Bacteria" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0)
+mesh = SubResource("CapsuleMesh_bs")
+surface_material_override/0 = SubResource("Material_bs")
+
+[node name="SporeShell" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
+visible = false
+mesh = SubResource("SphereMesh_spore")
+surface_material_override/0 = SubResource("Material_spore")
+
+[node name="AcidParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+emitting = false
+amount = 500
+lifetime = 3.0
+process_material = SubResource("ParticleProcess_acid")
+draw_pass_1 = SubResource("SphereMesh_acid_particle")
+
+[node name="TitleLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
+modulate = Color(1, 1, 1, 0)
+text = "Spore-Forming Bacteria"
+font_size = 64
+outline_size = 4
+modulate_color = Color(1.0, 0.835, 0.31, 1.0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+light_color = Color(1.0, 0.835, 0.31, 1.0)
+light_energy = 1.5
+omni_range = 10.0

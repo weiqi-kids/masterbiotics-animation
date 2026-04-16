@@ -1,0 +1,209 @@
+[gd_scene load_steps=22 format=3 uid="uid://body_journey_scene"]
+
+[ext_resource type="Script" path="res://scenes/body_journey/body_journey.gd" id="1"]
+
+[sub_resource type="StandardMaterial3D" id="Material_esophagus"]
+transparency = 1
+albedo_color = Color(0.6, 0.3, 0.3, 0.4)
+emission_enabled = true
+emission = Color(0.5, 0.2, 0.2, 1.0)
+emission_energy_multiplier = 0.2
+cull_mode = 2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_esophagus"]
+top_radius = 0.8
+bottom_radius = 0.6
+height = 6.0
+radial_segments = 24
+
+[sub_resource type="StandardMaterial3D" id="Material_stomach"]
+transparency = 1
+albedo_color = Color(0.4, 0.5, 0.3, 0.35)
+emission_enabled = true
+emission = Color(0.4, 0.733, 0.416, 1.0)
+emission_energy_multiplier = 0.3
+cull_mode = 2
+
+[sub_resource type="SphereMesh" id="SphereMesh_stomach"]
+radius = 2.0
+height = 2.5
+radial_segments = 24
+rings = 16
+
+[sub_resource type="StandardMaterial3D" id="Material_small_intestine"]
+transparency = 1
+albedo_color = Color(0.7, 0.45, 0.3, 0.4)
+emission_enabled = true
+emission = Color(0.8, 0.5, 0.3, 1.0)
+emission_energy_multiplier = 0.2
+cull_mode = 2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_small_intestine"]
+top_radius = 0.5
+bottom_radius = 0.5
+height = 8.0
+radial_segments = 20
+
+[sub_resource type="StandardMaterial3D" id="Material_large_intestine"]
+transparency = 1
+albedo_color = Color(0.5, 0.35, 0.25, 0.4)
+emission_enabled = true
+emission = Color(0.6, 0.4, 0.3, 1.0)
+emission_energy_multiplier = 0.2
+cull_mode = 2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_large_intestine"]
+top_radius = 0.9
+bottom_radius = 0.9
+height = 5.0
+radial_segments = 20
+
+[sub_resource type="StandardMaterial3D" id="Material_bacteria"]
+albedo_color = Color(1.0, 0.835, 0.31, 1.0)
+emission_enabled = true
+emission = Color(1.0, 0.835, 0.31, 1.0)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_bacteria"]
+radius = 0.12
+height = 0.24
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcess_acid"]
+emission_shape = 3
+emission_box_extents = Vector3(1.5, 1.0, 1.5)
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 0.3
+initial_velocity_max = 0.8
+gravity = Vector3(0, -0.2, 0)
+color = Color(0.4, 0.733, 0.416, 0.5)
+
+[sub_resource type="SphereMesh" id="SphereMesh_acid_draw"]
+radius = 0.04
+height = 0.08
+
+[sub_resource type="StandardMaterial3D" id="Material_acid_draw"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.4, 0.733, 0.416, 0.6)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcess_sprout"]
+emission_shape = 1
+emission_sphere_radius = 0.5
+direction = Vector3(0, 1, 0)
+spread = 60.0
+initial_velocity_min = 2.0
+initial_velocity_max = 4.0
+gravity = Vector3(0, -1.0, 0)
+color = Color(1.0, 0.835, 0.31, 0.9)
+
+[sub_resource type="SphereMesh" id="SphereMesh_sprout_draw"]
+radius = 0.03
+height = 0.06
+
+[sub_resource type="StandardMaterial3D" id="Material_sprout_draw"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1.0, 0.835, 0.31, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="Material_gut_wall"]
+transparency = 1
+albedo_color = Color(0.6, 0.4, 0.35, 0.5)
+emission_enabled = true
+emission = Color(1.0, 0.835, 0.31, 1.0)
+emission_energy_multiplier = 0.2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gut_wall"]
+size = Vector2(4, 3)
+
+[node name="BodyJourney" type="Node3D"]
+script = ExtResource("1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
+fov = 55.0
+
+[node name="Esophagus" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+mesh = SubResource("CylinderMesh_esophagus")
+surface_material_override/0 = SubResource("Material_esophagus")
+
+[node name="Stomach" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.3, 0, 0, 0, 0.8, 0, 0, 0, 1.3, 0, -8, 0)
+mesh = SubResource("SphereMesh_stomach")
+surface_material_override/0 = SubResource("Material_stomach")
+
+[node name="SmallIntestine" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -14, 0)
+mesh = SubResource("CylinderMesh_small_intestine")
+surface_material_override/0 = SubResource("Material_small_intestine")
+
+[node name="LargeIntestine" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20, 0)
+mesh = SubResource("CylinderMesh_large_intestine")
+surface_material_override/0 = SubResource("Material_large_intestine")
+
+[node name="BacteriaGroup" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Bacterium1" type="MeshInstance3D" parent="BacteriaGroup"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0, 0)
+mesh = SubResource("SphereMesh_bacteria")
+surface_material_override/0 = SubResource("Material_bacteria")
+
+[node name="Bacterium2" type="MeshInstance3D" parent="BacteriaGroup"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.1, 0)
+mesh = SubResource("SphereMesh_bacteria")
+surface_material_override/0 = SubResource("Material_bacteria")
+
+[node name="Bacterium3" type="MeshInstance3D" parent="BacteriaGroup"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, -0.2, 0.2)
+mesh = SubResource("SphereMesh_bacteria")
+surface_material_override/0 = SubResource("Material_bacteria")
+
+[node name="Bacterium4" type="MeshInstance3D" parent="BacteriaGroup"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0.15, -0.1)
+mesh = SubResource("SphereMesh_bacteria")
+surface_material_override/0 = SubResource("Material_bacteria")
+
+[node name="Bacterium5" type="MeshInstance3D" parent="BacteriaGroup"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.1, -0.15)
+mesh = SubResource("SphereMesh_bacteria")
+surface_material_override/0 = SubResource("Material_bacteria")
+
+[node name="AcidParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
+emitting = false
+amount = 300
+lifetime = 3.0
+process_material = SubResource("ParticleProcess_acid")
+draw_pass_1 = SubResource("SphereMesh_acid_draw")
+
+[node name="SproutParticles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 200
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.9
+process_material = SubResource("ParticleProcess_sprout")
+draw_pass_1 = SubResource("SphereMesh_sprout_draw")
+
+[node name="GutWall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, -20, -1.5)
+transparency = 0.8
+mesh = SubResource("PlaneMesh_gut_wall")
+surface_material_override/0 = SubResource("Material_gut_wall")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+light_color = Color(1.0, 0.835, 0.31, 1.0)
+light_energy = 2.0
+omni_range = 15.0
+
+[node name="PhaseLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+modulate = Color(1, 1, 1, 0)
+text = ""
+font_size = 48
+outline_size = 4
+modulate_color = Color(1.0, 0.835, 0.31, 1.0)
