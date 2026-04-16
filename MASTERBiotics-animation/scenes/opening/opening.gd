@@ -9,8 +9,10 @@ func _ready() -> void:
 
     # Phase 2 (5-10s): Particles attract toward center
     tween.tween_callback(func():
-        var mat: ShaderMaterial = particles.process_material
-        mat.set_shader_parameter("attraction", 1.5)
+        var mat := particles.process_material as ParticleProcessMaterial
+        if mat:
+            mat.radial_accel_min = -1.5
+            mat.radial_accel_max = -1.5
     ).set_delay(5.0)
 
     # Phase 3 (10-13s): Logo fades in with glow

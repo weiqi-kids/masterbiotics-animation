@@ -16,7 +16,8 @@ var _interactive_timer := 0.0
 @onready var js_bridge: Node = get_node("../JSBridge")
 
 func _ready() -> void:
-	_enter_state(State.AUTO_PLAY)
+	# Defer so all sibling @onready vars are initialized first
+	_enter_state.call_deferred(State.AUTO_PLAY)
 
 func _process(delta: float) -> void:
 	match current_state:

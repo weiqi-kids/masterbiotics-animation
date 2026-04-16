@@ -71,6 +71,15 @@ window.onGodotSetLanguage = function(lang) {
   setLanguage(lang);
 };
 
+// --- Home button ---
+const btnHome = document.getElementById('btn-home');
+if (btnHome) {
+  btnHome.addEventListener('click', (e) => {
+    e.stopPropagation();
+    sendToGodot('restart', '');
+  });
+}
+
 // --- Loading screen ---
 const loadingScreen = document.getElementById('loading-screen');
 const loadingProgress = loadingScreen?.querySelector('.loading-progress');

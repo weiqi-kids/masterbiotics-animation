@@ -1,17 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://opening_scene"]
+[gd_scene load_steps=6 format=3 uid="uid://opening_scene"]
 
 [ext_resource type="Script" path="res://scenes/opening/opening.gd" id="1"]
-[ext_resource type="Shader" path="res://assets/shaders/particle_glow.gdshader" id="2"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_particle"]
-shader = ExtResource("2")
-shader_parameter/speed = 1.0
-shader_parameter/spread = 3.0
-shader_parameter/target_position = Vector3(0, 0, 0)
-shader_parameter/attraction = 0.0
-
-[sub_resource type="QuadMesh" id="QuadMesh_particle"]
-size = Vector2(0.05, 0.05)
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_opening"]
+emission_shape = 1
+emission_sphere_radius = 3.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 0.25
+initial_velocity_max = 0.35
+radial_accel_min = 0.0
+radial_accel_max = 0.0
+damping_min = 0.3
+damping_max = 0.5
+turbulence_enabled = true
+turbulence_noise_strength = 0.1
+turbulence_noise_scale = 2.0
+color = Color(1.0, 0.84, 0.31, 1.0)
 
 [sub_resource type="StandardMaterial3D" id="Material_quad"]
 transparency = 1
@@ -21,7 +26,9 @@ albedo_color = Color(1.0, 0.835, 0.31, 0.9)
 billboard_mode = 3
 billboard_keep_scale = true
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dummy"]
+[sub_resource type="QuadMesh" id="QuadMesh_particle"]
+size = Vector2(0.05, 0.05)
+material = SubResource("Material_quad")
 
 [sub_resource type="StandardMaterial3D" id="Material_logo"]
 shading_mode = 0
@@ -37,7 +44,7 @@ fov = 60.0
 [node name="ParticleEmitter" type="GPUParticles3D" parent="."]
 amount = 2000
 lifetime = 4.0
-process_material = SubResource("ShaderMaterial_particle")
+process_material = SubResource("ParticleProcessMaterial_opening")
 draw_pass_1 = SubResource("QuadMesh_particle")
 
 [node name="LogoText" type="Label3D" parent="."]

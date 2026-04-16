@@ -8,7 +8,8 @@ var _callback_ref: JavaScriptObject = null
 func _ready() -> void:
 	if OS.has_feature("web"):
 		_callback_ref = JavaScriptBridge.create_callback(_on_web_command)
-		JavaScriptBridge.eval("window.registerGodotCallback(%s)" % _callback_ref)
+		var window := JavaScriptBridge.get_interface("window")
+		window.registerGodotCallback(_callback_ref)
 		print("[JSBridge] Registered web callback")
 	else:
 		print("[JSBridge] Not running in browser, bridge disabled")

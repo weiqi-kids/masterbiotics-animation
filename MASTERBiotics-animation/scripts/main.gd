@@ -13,6 +13,8 @@ func _on_web_command(command: String, payload: Variant) -> void:
 	match command:
 		"jump_to_scene":
 			state_machine.on_jump_to_scene(str(payload))
+		"restart":
+			scene_manager.restart()
 		"set_language":
 			TranslationServer.set_locale(str(payload))
 			js_bridge.set_language(str(payload))

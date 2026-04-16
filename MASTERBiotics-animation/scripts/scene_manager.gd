@@ -49,16 +49,34 @@ func jump_to_scene(scene_id: String) -> void:
 	for i in range(SCENES.size()):
 		if SCENES[i].id == scene_id:
 			_current_index = i
-			_auto_playing = false
+			_auto_playing = true
 			_load_scene(i)
 			return
 	push_warning("[SceneManager] Unknown scene_id: %s" % scene_id)
 
+## Skip current scene and advance to next (click/tap)
+func skip_to_next() -> void:
+	if _transitioning:
+		return
+	var next_index := _current_index + 1
+	if next_index >= SCENES.size():
+		next_index = 0  # Loop back to S0
+	_current_index = next_index
+	_auto_playing = true
+	_load_scene(next_index)
+
+## Restart from S0
+func restart() -> void:
+	if _transitioning:
+		return
+	_current_index = 0
+	_auto_playing = true
+	_load_scene(0)
+
 func _advance_auto_play() -> void:
 	var next_index := _current_index + 1
 	if next_index >= SCENES.size():
-		auto_play_loop_complete.emit()
-		return
+		next_index = 0  # Loop back to S0 instead of stopping
 	_current_index = next_index
 	_load_scene(next_index)
 

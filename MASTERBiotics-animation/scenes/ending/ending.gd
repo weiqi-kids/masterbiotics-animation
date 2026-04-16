@@ -29,25 +29,24 @@ func _run_animation() -> void:
 	tween.tween_property(camera, "position:z", 10.0, 12.0) \
 		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 
-	# Particles begin — set attraction to pull inward
+	# Particles begin
 	tween.parallel().tween_callback(func():
 		particles.emitting = true
-		var mat := particles.process_material as ShaderMaterial
-		if mat:
-			mat.set_shader_parameter("attraction", 0.0)
 	)
 
-	# Gradually increase attraction (particles fly inward)
+	# Gradually increase attraction (negative radial_accel = inward)
 	tween.tween_callback(func():
-		var mat := particles.process_material as ShaderMaterial
+		var mat := particles.process_material as ParticleProcessMaterial
 		if mat:
-			mat.set_shader_parameter("attraction", 0.8)
+			mat.radial_accel_min = -0.8
+			mat.radial_accel_max = -0.8
 	).set_delay(3.0)
 
 	tween.tween_callback(func():
-		var mat := particles.process_material as ShaderMaterial
+		var mat := particles.process_material as ParticleProcessMaterial
 		if mat:
-			mat.set_shader_parameter("attraction", 1.5)
+			mat.radial_accel_min = -1.5
+			mat.radial_accel_max = -1.5
 	).set_delay(3.0)
 
 	# Light begins warming up
@@ -69,9 +68,10 @@ func _run_animation() -> void:
 
 	# Particles reach max convergence
 	tween.tween_callback(func():
-		var mat := particles.process_material as ShaderMaterial
+		var mat := particles.process_material as ParticleProcessMaterial
 		if mat:
-			mat.set_shader_parameter("attraction", 2.0)
+			mat.radial_accel_min = -2.0
+			mat.radial_accel_max = -2.0
 	).set_delay(2.0)
 
 	# ========== Phase 3 (30-45s): Gentle pulse + URL ==========
