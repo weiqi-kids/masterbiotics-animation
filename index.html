@@ -2,22 +2,95 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
   <title>MASTERBiotics™ 日本億菌大師</title>
+  <link rel="icon" type="image/png" href="godot/index.icon.png">
+  <link rel="apple-touch-icon" href="godot/index.apple-touch-icon.png">
   <link rel="stylesheet" href="css/overlay.css">
 </head>
 <body>
+  <!-- Godot Canvas (z-index: 0) -->
   <div id="godot-container">
-    <canvas id="canvas" tabindex="-1"></canvas>
+    <canvas id="canvas" tabindex="-1">
+      Your browser does not support the canvas tag.
+    </canvas>
   </div>
+
+  <!-- Web Overlay (z-index: 10) -->
   <div id="overlay">
     <div id="chart-container"></div>
     <div id="touch-menu" class="hidden"></div>
+    <button id="btn-home" title="回到片頭">&#8634;</button>
   </div>
+
+  <!-- Loading Screen (z-index: 100) -->
   <div id="loading-screen">
     <div class="loading-logo">MASTERBiotics™</div>
     <div class="loading-bar"><div class="loading-progress"></div></div>
+    <div id="loading-notice" style="display:none; color:#e0e0e0; font-size:14px; margin-top:16px; max-width:400px; text-align:center;"></div>
   </div>
+
+  <!-- Load Godot engine -->
+  <script src="godot/index.js"></script>
+  <script>
+    const GODOT_CONFIG = {
+      args: [],
+      canvasResizePolicy: 2,
+      ensureCrossOriginIsolationHeaders: false,
+      executable: "godot/index",
+      experimentalVK: false,
+      fileSizes: { "godot/index.pck": 219748, "godot/index.wasm": 37695054 },
+      focusCanvas: true,
+      gdextensionLibs: [],
+    };
+    const GODOT_THREADS_ENABLED = false;
+
+    const loadingProgress = document.querySelector('.loading-progress');
+    const loadingScreen = document.getElementById('loading-screen');
+    const loadingNotice = document.getElementById('loading-notice');
+
+    // Hook for bridge.js loading callbacks
+    window.onGodotLoadingProgress = function(current, total) {
+      if (loadingProgress && total > 0) {
+        const pct = Math.min(100, (current / total) * 100);
+        loadingProgress.style.width = pct + '%';
+      }
+    };
+
+    window.onGodotLoaded = function() {
+      if (loadingScreen) {
+        loadingScreen.classList.add('fade-out');
+        setTimeout(() => loadingScreen.remove(), 800);
+      }
+    };
+
+    const engine = new Engine(GODOT_CONFIG);
+
+    const missing = Engine.getMissingFeatures({ threads: GODOT_THREADS_ENABLED });
+
+    if (missing.length !== 0) {
+      loadingNotice.style.display = 'block';
+      loadingNotice.textContent = 'Browser missing features: ' + missing.join(', ');
+    } else {
+      engine.startGame({
+        onProgress: function(current, total) {
+          if (current > 0 && total > 0) {
+            const pct = Math.min(100, (current / total) * 100);
+            loadingProgress.style.width = pct + '%';
+          }
+        },
+      }).then(() => {
+        // Engine started — hide loading screen
+        window.onGodotLoaded();
+      }, (err) => {
+        console.error('Godot engine failed to start:', err);
+        loadingNotice.style.display = 'block';
+        loadingNotice.textContent = err.message || 'Failed to start engine.';
+      });
+    }
+  </script>
+
+  <!-- Web overlay modules -->
   <script type="module" src="js/bridge.js"></script>
   <script type="module" src="js/scene-charts.js"></script>
   <script type="module" src="js/touch-menu.js"></script>
