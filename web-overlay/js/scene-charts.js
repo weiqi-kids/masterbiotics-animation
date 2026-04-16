@@ -1,5 +1,6 @@
 import { on } from './bridge.js';
 import { renderConsumerFocus } from '../charts/consumer-focus.js';
+import { renderImmuneGroup } from '../charts/immune-group.js';
 
 let chartData = null;
 const chartContainer = document.getElementById('chart-container');
@@ -12,7 +13,11 @@ const SCENE_CHARTS = {
     }
   },
   scene_2: null,
-  scene_3: null,
+  scene_3: {
+    render: (data) => {
+      renderImmuneGroup(data, 'chart-container');
+    }
+  },
   scene_4: null,
   scene_5: null,
   scene_6: null,
