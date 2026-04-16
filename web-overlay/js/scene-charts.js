@@ -3,6 +3,9 @@ import { renderConsumerFocus } from '../charts/consumer-focus.js';
 import { renderImmuneGroup } from '../charts/immune-group.js';
 import { renderSurvivalLine } from '../charts/survival-line.js';
 import { renderColonizationBar } from '../charts/colonization-bar.js';
+import { renderGlp1Bar } from '../charts/glp1-bar.js';
+import { renderDopamineBar } from '../charts/dopamine-bar.js';
+import { renderSodCatalase } from '../charts/sod-catalase.js';
 
 let chartData = null;
 const chartContainer = document.getElementById('chart-container');
@@ -36,7 +39,38 @@ const SCENE_CHARTS = {
       renderImmuneGroup(data, 'chart-container');
     }
   },
-  scene_4: null,
+  scene_4: {
+    render: (data) => {
+      const container = document.getElementById('chart-container');
+      container.style.display = 'flex';
+      container.style.flexDirection = 'column';
+      container.style.gap = '4px';
+
+      const glpDiv = document.createElement('div');
+      glpDiv.id = 'chart-glp1';
+      glpDiv.style.flex = '1';
+      container.appendChild(glpDiv);
+      renderGlp1Bar(data.s4_glp1, 'chart-glp1');
+
+      setTimeout(() => {
+        glpDiv.style.transition = 'opacity 0.5s';
+        glpDiv.style.opacity = '0';
+        setTimeout(() => {
+          glpDiv.remove();
+          const dopaDiv = document.createElement('div');
+          dopaDiv.id = 'chart-dopamine';
+          dopaDiv.style.flex = '1';
+          container.insertBefore(dopaDiv, container.firstChild);
+          renderDopamineBar(data.s4_dopamine, 'chart-dopamine');
+        }, 500);
+      }, 20000);
+
+      setTimeout(() => {
+        container.innerHTML = '';
+        renderSodCatalase(data, 'chart-container');
+      }, 40000);
+    }
+  },
   scene_5: null,
   scene_6: null,
 };
