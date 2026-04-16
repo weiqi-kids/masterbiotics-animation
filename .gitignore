@@ -1,0 +1,6 @@
+node_modules/
+.DS_Store
+.superpowers/
+web-overlay/.godot/
+MASTERBiotics-animation/.godot/
+*.import

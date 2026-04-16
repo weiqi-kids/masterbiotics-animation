@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MASTERBiotics™ 日本億菌大師</title>
+  <link rel="stylesheet" href="css/overlay.css">
+</head>
+<body>
+  <div id="godot-container">
+    <canvas id="canvas" tabindex="-1"></canvas>
+  </div>
+  <div id="overlay">
+    <div id="chart-container"></div>
+    <div id="touch-menu" class="hidden"></div>
+  </div>
+  <div id="loading-screen">
+    <div class="loading-logo">MASTERBiotics™</div>
+    <div class="loading-bar"><div class="loading-progress"></div></div>
+  </div>
+  <script type="module" src="js/bridge.js"></script>
+  <script type="module" src="js/scene-charts.js"></script>
+  <script type="module" src="js/touch-menu.js"></script>
+</body>
+</html>
